@@ -1,18 +1,40 @@
 const listaPokemons = document.getElementById("pokemonsList");
 
+function covertTypeLi(type){
+    console.log(type)
+    return `
+    <li class="type">${type.type.name}</li>`
+}
+
+function helperLi(pokemon){
+    const tipos = pokemon.types.map((e)=>covertTypeLi(e));
+    const li = tipos.join('');
+    return li
+}
+
 function convertPokemonHtml(pokemon){
+    let li = [];
+    const basicInfo = `
+        <li class="pokemon">
+            <span class="number">#${pokemon.id}</span>
+            <span class="name">${pokemon.name}</span>
+
+            <div class="detail">
+        <ol class="types">`
     return `
     <li class="pokemon">
         <span class="number">#${pokemon.id}</span>
         <span class="name">${pokemon.name}</span>
 
         <div class="detail">
-            <ol class="types">
-                <li class="type">grass</li>
-                <li class="type">poison</li>
-            </ol>
+            <ol class="types">`+
+            helperLi(pokemon)
+            
 
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
+            +
+            `    
+            </ol>
+            <img src=${pokemon.sprites.other.dream_world.front_default}
                 alt="${pokemon.name}">
         </div>
     </li>`
