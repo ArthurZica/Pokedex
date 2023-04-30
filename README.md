@@ -4,6 +4,8 @@ Pokedex project consuming the "poke api" api to fetch data and populating the si
 
 Projeto de Pokedex consumindo a api "poke api" para buscar dados e preenchendo o site com os pokemons da primeira geração. Site desenvolvido com Javascript puro e com a dinamica mobile-first.
 
+link: https://arthurzica.github.io/Pokedex/index.html
+
 # Screenshots:
 
 Desktop:
