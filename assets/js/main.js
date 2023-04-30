@@ -2,44 +2,42 @@ const listaPokemons = document.getElementById("pokemonsList");
 const loadMoreButton = document.getElementById("loadMoreButton");
 const limit=10;
 let offset=0;
+const maxRecords = 151;
+loadPokemonItens(offset,limit);
 
 loadMoreButton.addEventListener("click",()=>{
     offset+=limit;
-    loadPokemonItens(offset,limit)})
+    const qtdRecords = offset+limit;
+    if(qtdRecords >= maxRecords){
+        console.log("dasdss");
+        const newLimit = maxRecords-offset;
+        loadPokemonItens(offset,newLimit)
+        loadMoreButton.parentElement.removeChild(loadMoreButton);
+    }else{
+        loadPokemonItens(offset,limit)
+    }
+})
 
-loadPokemonItens(offset,limit);
 
-function covertTypeLi(type){
+function convertPokemonToLi(pokemon) {
     return `
-    <li class="type ${type}">${type}</li>`
-}
-
-function helperLi(pokemon){
-    const tipos = pokemon.types.map((e)=>covertTypeLi(e));
-    const li = tipos.join('');
-    return li
-}
-
-function convertPokemonHtml(pokemon){
-    return `
-    <li class="pokemon ${pokemon.type}">
-        <span class="number">#${pokemon.id}</span>
-        <span class="name">${pokemon.name}</span>
-
-        <div class="detail">
-            <ol class="types">`
-            +helperLi(pokemon)+
-            `    
-            </ol>
-            <img src=${pokemon.image}
-                alt="${pokemon.name}">
-        </div>
-    </li>`
+        <li class="pokemon ${pokemon.type}" onclick="window.location.href='poke-detail.html?${pokemon.id}'">
+            <span class="number">#${pokemon.id}</span>
+            <span class="name">${pokemon.name}</span>
+            <div class="detail">
+                <ol class="types">
+                    ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
+                </ol>
+                <img src="${pokemon.image}"
+                     alt="${pokemon.name}">
+            </div>
+        </li>
+    `
 }
 
 function loadPokemonItens(offset,limit){
     pokeApi.getPokemons(offset,limit).then((pokemonList)=> {
-        const newList = pokemonList.map((e)=>convertPokemonHtml(e))
+        const newList = pokemonList.map((e)=>convertPokemonToLi(e))
         const newHtml = newList.join('');
         listaPokemons.innerHTML+=newHtml;
     })

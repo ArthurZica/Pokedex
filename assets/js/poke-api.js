@@ -8,6 +8,10 @@ function covertPokeapiToPokemon(pokeapiPokemon) {
     const types = pokeapiPokemon.types.map((type) => type.type.name);
     pokemon.type = types[0];
     pokemon.types = types;
+    pokemon.base_experience = pokeapiPokemon.base_experience;
+    pokemon.height = pokeapiPokemon.height*10;
+    pokemon.weight =pokeapiPokemon.weight/10;
+    pokemon.abilities = pokeapiPokemon.abilities;
     
     return pokemon
 }
@@ -24,6 +28,13 @@ pokeApi.getPokemons = (offset=0 , limit=10) => {
 
 pokeApi.getPokemonsDetail = (pokemon) => {
     return fetch(pokemon.url)
+    .then((response) => response.json())
+    .then((pokemon) => covertPokeapiToPokemon(pokemon))
+}
+
+pokeApi.getOnePokemon = (pokemon) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}/`
+    return fetch(url)
     .then((response) => response.json())
     .then((pokemon) => covertPokeapiToPokemon(pokemon))
 }

@@ -8,12 +8,18 @@
 }
 
 .pokemon {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     margin: .5rem;
     padding: 1rem;
     border-radius: 1rem;
     background-color: #49d0b0;
+    transition: all .3s ease-in-out;
+}
+
+.pokemon:hover{
+    transform: scale(1.1);
 }
 
 .fire{
@@ -131,6 +137,7 @@
     font-size: .625rem;
     border-radius: 1rem;
     text-align: center;
+    text-transform: capitalize;
 }
 
 .pokemon .detail img {
