@@ -1,4 +1,7 @@
 # Trilha JS Developer - Pokedex
+
+Pokedex project consuming the "poke api" api to fetch data and populating the site with first generation pokemons. Website developed with pure Javascript and mobile-first dynamics.
+
 Projeto de Pokedex consumindo a api "poke api" para buscar dados e preenchendo o site com os pokemons da primeira geração. Site desenvolvido com Javascript puro e com a dinamica mobile-first.
 
 # Screenshots:
